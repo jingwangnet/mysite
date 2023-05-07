@@ -6,12 +6,6 @@ from functional_tests.const import HOME_TITLE
 
 
 class HomePageTest(TestCase):
-    def test_home_page_mapping(self):
-        found = resolve("/")
-        self.assertEqual(found.func, home_page)
-
-    def test_home_page_return_correctly_content(self):
-        request = HttpRequest()
-        response = home_page(request)
-        content = response.content.decode()
-        self.assertIn(HOME_TITLE, content)
+    def test_home_page_using_template(self):
+        response = self.client.get("/")
+        self.assertTemplateUsed(response, "blog/home.html")
