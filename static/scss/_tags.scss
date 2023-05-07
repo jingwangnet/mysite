@@ -1,0 +1,28 @@
+a {
+  color: var(--text-color);
+  &:hover {
+     color: var(--text-second-color);
+     font-weight: 700;
+     text-decoration: underline;
+  }
+}
+
+
+$headings: (h1: 2em, h2: 1.5em, h3: 1.17em, h4: 1.12em, h5: .83em, h6: .75em); 
+
+@each $heading, $size in $headings {
+  #{$heading} {
+    font-family: "hina mincho", sans-serif;
+    color: var(--text-second-color);
+    font-size: $size;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  } 
+}
+
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}

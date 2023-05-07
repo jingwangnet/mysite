@@ -1,0 +1,57 @@
+@import 'import';
+@import 'reset';
+@import 'mixins';
+@import 'vars';
+@import 'tags';
+@import 'extends';
+@import 'components';
+
+body {
+  color: var(--text-color);
+  font-size: var(--font-size);
+
+  >header, main {
+    width: 960px;
+    margin: 0 auto;
+    @include max-w(960) {
+      width: 95%;
+    }
+  }
+
+  > header {  
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 5px solid #000;
+    @include max-w(960) {
+      text-align: center;
+
+    }
+    a.logo {
+      color: var(--text-second-color);
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: 'hina mincho',sans-serif;
+      text-transform: capitalize;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .navbar {
+      text-align: right;
+      @include max-w(960) {
+        text-align: center;
+
+      }
+      li {
+        display: inline-block;
+        a {
+          color: var(--text-second-color);
+          padding: 10px;
+          display: inline-block;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
