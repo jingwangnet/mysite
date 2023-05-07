@@ -35,5 +35,17 @@ class HomePageTest(FunctionalTest):
 
         # looking up the both posts in the home_page
         self.browser.get(self.live_server_url)
-        self.browser.find_element(By.LINK_TEXT, first_title)
-        self.browser.find_element(By.LINK_TEXT, second_title)
+        first_post_url = self.browser.find_element(By.LINK_TEXT, first_title)
+        first_post_url.click()
+        body_text = self.brower.find_element(By.TAG_NAME, body).text
+        self.assertIn(first_title, body_text)
+        self.assertIn(first_content, body_text)
+        
+        logo_url = self.browser.find_element(By.LINK_TEXT， 'Jing Wang')
+        logo_url.click()
+
+        second_post_url = self.browser.find_element(By.LINK_TEXT, second_title)
+        second_post_url.click()
+        body_text = self.brower.find_element(By.TAG_NAME, body).text
+        self.assertIn(second_title, body_text)
+        self.assertIn(second_content, body_text)
