@@ -2,7 +2,16 @@
 {% block title %}静网 jing Wang{% endblock %}
 
 {% block content %}
-{% for post in posts %}
-  <p><a href="#">{{ post }}</a><P>
-{% endfor %}
+{% regroup posts|dictsortreversed:"publish.year" by publish.year as year_posts %}
+  {% for year, posts_list  in  year_posts %}
+  <section>
+    <h1 class="site-date-catalog">{{ year }}</h1>
+      {% for post in posts_list %}
+      <div class="post-line">
+        <p class="post-date">{{ post.publish|date:'M d' }}</p>
+        <p class="post-title"><a href="post.html">{{ post.title }}</a></p>
+      </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
 {% endblock %}

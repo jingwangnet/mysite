@@ -19,3 +19,9 @@ class PostModelTest(TestCase):
     def test_str(self):
         post = Post.objects.create(title="The first post", content="content")
         self.assertEqual(str(post), "The first post")
+
+    def test_odering(self):
+        post1 = Post.objects.create(title="The first post", content="content")
+        post2 = Post.objects.create(title="The first post", content="content")
+        post3 = Post.objects.create(title="The first post", content="content")
+        self.assertEqual([p.id for p in Post.objects.all()], [3, 2, 1])
