@@ -35,3 +35,14 @@ class FunctionalTest(StaticLiveServerTestCase):
         username_input.send_keys(username)
         password_input.send_keys(password)
         submit.click()
+
+    def create_post(self, title, content):
+        title_input = self.browser.find_element(By.XPATH, '//*[@id="id_title"]')
+        content_input = self.browser.find_element(By.XPATH, '//*[@id="id_content"]')
+        submit = self.browser.find_element(
+            By.XPATH, '//*[@id="post_form"]/div/div/input[1]'
+        )
+
+        title_input.send_keys(title)
+        content_input.send_keys(content)
+        submit.click()

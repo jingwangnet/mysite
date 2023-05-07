@@ -1,3 +1,4 @@
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from ..base import FunctionalTest
@@ -16,4 +17,19 @@ class HomePageTest(FunctionalTest):
         username, password = self.create_user("jingwang", "jingwang")
         self.login(username, password)
 
-        self.browser.find_element(By.LINK_TEXT, "博客").click()
+        self.browser.find_element(By.LINK_TEXT, "Posts").click()
+        self.browser.find_element(By.LINK_TEXT, "ADD POST").click()
+
+        title = "The first post"
+        content = "content"
+        self.create_post(title, content)
+        self.browser.find_element(By.LINK_TEXT, title)
+
+        self.browser.find_element(By.LINK_TEXT, "ADD POST").click()
+        title = "The second post"
+        content = "content 2"
+        self.create_post(title, content)
+        self.browser.find_element(By.LINK_TEXT, title)
+
+        time.sleep(5)
+        self.browser.get(self.live_server_url)
