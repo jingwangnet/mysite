@@ -1,1 +1,8 @@
 {% extends 'base.html' %}
+{% block title %}静网 jing Wang{% endblock %}
+
+{% block content %}
+{% for post in posts %}
+  <p><a href="#">{{ post }}</a><P>
+{% endfor %}
+{% endblock %}
