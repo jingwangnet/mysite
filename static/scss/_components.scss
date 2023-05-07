@@ -1,22 +1,40 @@
 article.post {
+  @import 'pygments';
   .post-content {
+    a {
+      text-decoration: underline;
+    }
+    strong {
+      color: var(--text-second-color);
+    }
+
     p {
         font-size: 1.2rem;
         line-height: 1.4;
+        code {
+          display: inline-block;
+          padding: 0  0.5rem;
+          background-color: var(--bg-color);
+        }
     }
-  }
-  a {
-    text-decoration: underline;
-  }
 
-  del {
-    text-decoration: line-through;
-  }
-  ul {
-    margin-left: 2rem; 
-    li {
-      list-style: inside;
-      margin-top: 10px;
+    del {
+      text-decoration: line-through;
+    }
+    ul, ol {
+      margin-left: 2rem; 
+      margin-bottom: 1rem;
+      li {
+        list-style: inside;
+        margin-top: 10px;
+      }
+    }
+
+    ol {
+      li {
+        list-style: auto;
+        margin-top: 10px;
+      }
     }
   }
 }

@@ -13,7 +13,8 @@
         </p>
       </header>
       <div class="post-content">
-        {{ post.content }}
+        {% load blog_tags %}
+        {{ post.content|markdown }}
       </div>
     </article>
 {% endblock %}
