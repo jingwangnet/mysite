@@ -11,7 +11,7 @@
       {% for post in posts_list %}
       <div class="post-line">
         <p class="post-date">{{ post.publish|date:'M d' }}</p>
-        <p class="post-title"><a href="post.html">{{ post.title }}</a></p>
+        <p class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
       </div>
       {% endfor %}
     </section>

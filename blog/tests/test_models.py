@@ -1,5 +1,6 @@
 from django.test import TestCase
 from blog.models import Post
+from django.urls import reverse
 
 
 class PostModelTest(TestCase):
@@ -25,3 +26,7 @@ class PostModelTest(TestCase):
         post2 = Post.objects.create(title="The first post", content="content")
         post3 = Post.objects.create(title="The first post", content="content")
         self.assertEqual([p.id for p in Post.objects.all()], [3, 2, 1])
+
+    def test_get_absolute_url(self):
+        post1 = Post.objects.create(title="The first post", content="content")
+        self.assertEqual(post1.get_absolute_url(), "/1/")
