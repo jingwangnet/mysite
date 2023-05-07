@@ -16,6 +16,7 @@ $headings: (h1: 2em, h2: 1.5em, h3: 1.17em, h4: 1.12em, h5: .83em, h6: .75em);
     color: var(--text-second-color);
     font-size: $size;
     font-weight: bold;
+    text-transform: capitalize;
     margin-top: 1rem;
     margin-bottom: 1rem;
   } 

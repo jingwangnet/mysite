@@ -9,10 +9,10 @@
   <section>
     <h1 class="site-date-catalog">{{ year }}</h1>
       {% for post in posts_list %}
-      <div class="post-line">
+      <article class="post-line">
+        <h1 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
         <p class="post-date">{{ post.publish|date:'M d' }}</p>
-        <p class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
-      </div>
+      </article>
       {% endfor %}
     </section>
   {% endfor %}
