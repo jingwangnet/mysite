@@ -39,11 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-INSTALLED_APPS.extend(
-    [
-        "blog",
-    ]
-)
+INSTALLED_APPS.extend(["blog", "page"])
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

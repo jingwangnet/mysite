@@ -4,8 +4,14 @@ article.post {
     a {
       text-decoration: underline;
     }
-    strong {
+    strong,b {
       color: var(--text-second-color);
+      &::before {
+        content: " ";
+      }
+      &::after {
+        content: " ";
+      }
     }
 
     p {
@@ -29,12 +35,32 @@ article.post {
         margin-top: 10px;
       }
     }
-
+    ul.contact {
+      li {
+        list-style: none;
+        i {
+          display: inline-block;
+          padding-right:  1rem;
+        }
+      }
+    }
+    
     ol {
       li {
         list-style: auto;
         margin-top: 10px;
       }
     }
+  }
+}
+
+span.tag {
+    color: black;
+  &::before {
+    content:"#";
+    font-weight: bold;
+  }
+  &::after {
+    content: ' ';
   }
 }

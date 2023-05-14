@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from blog import views
+from page.views import AboutPageView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blog.urls")),
+    path("about/", AboutPageView.as_view(), name="about"),
 ]
