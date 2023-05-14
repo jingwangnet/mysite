@@ -11,6 +11,7 @@ img {
   display: block;
   max-width: 100%;
   vertical-align: middle;
+  background-color: var(--bg-color);
 }
 
 
@@ -49,14 +50,30 @@ blockquote {
 
 table {
   border-collapse: collapse;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   th, td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
   }
   th {
     background-color: #f2f2f2;
     font-weight: bold;
+  }
+  .table-danger {
+    background: var(--red);
+  }
+  .table-warning {
+    background: var(--yellow);
+  }
+  .table-success {
+    background: var(--green);
+  }
+  .table-info {
+    background: var(--blue);
   }
 }
 

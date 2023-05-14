@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% block title %}我的Home Lab|Our HomeLab{% endblock %}
+{% load static %}
+{% block css %}{% static 'css/post.css' %}{% endblock %}
+
+{% block content %}
+<article class="post">
+  <header>
+    <h1>关于</h1>
+  </header>
+  <div class="post-content">
+              <section>
+            <h2 class="border-bottom">我的HomeLab</h2>
+
+            <h3>链接</h3>
+
+            <div class="img-wrapper">
+              <figure>
+                <img src="{% static 'img/homelab/物理链接图.png' %}" alt="物理链接图">
+                <figcaption>物理链接图</figcaption>
+              </figure>
+              <figure>
+                <img src="{% static 'img/homelab/网络图.png' %}" alt="网络图">
+                <figcaption>网络拓扑图</figcaption>
+              </figure>
+            </div>
+            <ul>
+              <li><a href="{% static 'img/homelab/物理链接图.png' %}" target="_blank">物理链接图</a></li>
+              <li><a href="{% static 'img/homelab/网络图.png' %}" target="_blank">网络拓扑图</a></li>
+            </ul>
+
+
+            <h3>网路划分和VLAN配置</h3>
+            <div class="table-responsive">
+              <table class="table  table-striped caption-top">
+                <caption>VLAN配置</caption>
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">网络名</th>
+                    <th scope="col">VLAN ID</th>
+                    <th scope="col">网段</th>
+                    <th scope="col">颜色</th>
+                    <th scope="col">备注</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>WAN</td>
+                    <td>10</td>
+                    <td>11.22.33.0/24</td>
+                    <td class="table-danger">红</td>
+                    <td>光猫的LAN口链接交换机作为WAN</td>
+                  </tr>
+                  <tr>
+                    <td>LAN</td>
+                    <td>100</td>
+                    <td>192.168.10.0/24</td>
+                    <td class="table-warning">黄</td>
+                    <td>主网，LOCAL和SERVER的上游</td>
+                  </tr>
+                  <tr>
+                    <td>SERVER</td>
+                    <td>1000</td>
+                    <td>192.168.20.0/24</td>
+                    <td class="table-success">绿</td>
+                    <td>用于暴露在公网环境</td>
+                  </tr>
+                  <tr>
+                    <td>LOCAL</td>
+                    <td>1010</td>
+                    <td>192.168.30.0/24</td>
+                    <td class="table-info">蓝</td>
+                    <td>用于家人电视等常规使用环境</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>交换机配置</h3>
+            <P><b>L1</b>为端口3和4链接聚合</p>
+            <div class="table-responsive">
+              <table class="table  table-striped caption-top">
+                <caption>主交换机配置</caption>
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">VID</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">5</th>
+                    <th scope="col">6</th>
+                    <th scope="col">7</th>
+                    <th scope="col">8</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>10</th>
+                    <td class="table-danger">U</td>
+                    <td>T</td>
+                    <td>T</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>100</th>
+                    <td></td>
+                    <td>T</td>
+                    <td>T</td>
+                    <td class="table-warning">U</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>1000</th>
+                    <td></td>
+                    <td>T</td>
+                    <td>T</td>
+                    <td></td>
+                    <td class="table-success">U</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>1100</th>
+                    <td></td>
+                    <td>T</td>
+                    <td>T</td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-info">U</td>
+                    <td class="table-info">U</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table  table-striped caption-top">
+                <caption>主交换机链接</caption>
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">PORT</th>
+                    <th scope="col">1</th>
+                    <th scope="col">2</th>
+                    <th scope="col">L1</th>
+                    <th scope="col">5</th>
+                    <th scope="col">6</th>
+                    <th scope="col">7</th>
+                    <th scope="col">8</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">PVID</th>
+                    <td class="table-danger">10</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td class="table-warning">100</td>
+                    <td class="table-success">1000</td>
+                    <td class="table-info">1100</td>
+                    <td class="table-info">1100</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">设备</th>
+                    <td class="table-danger">光猫</td>
+                    <td>子交换机T口</td>
+                    <td>HP 服务器</td>
+                    <td class="table-warning">华硕路由器WAN口</td>
+                    <td class="table-success">备用</td>
+                    <td class="table-info">华硕路由器LAN口</td>
+                    <td class="table-info"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>设备清单</h3>
+            <p><small>显示不全可以左右滑动动</small></p>
+            <div class="table-responsive">
+              <table class="table  table-striped caption-top">
+                <caption>设备清单</caption>
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">类型</th>
+                    <th scope="col">设备名</th>
+                    <th scope="col">系统</th>
+                    <th scope="col">备注</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>交换机</td>
+                    <td>网件GS108t</td>
+                    <td></td>
+                    <td>主交换机。用于内网划分VLAN, NAS链接链路聚合</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>虚拟化服务器</td>
+                    <td>HP microserver gen8</td>
+                    <td>PVE</td>
+                    <td>提供虚拟化NAS CI 主网关OpenWRT Windows桌面诸多功能</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>路由器</td>
+                    <td>PVE虚拟化</td>
+                    <td>OpewnWRT 22.02</td>
+                    <td>主路由。 LAN子网的网关，为LOCAL 和SERVER 两个子网提供网关</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>路由器</td>
+                    <td>PVE虚拟化</td>
+                    <td>OpewnWRT 22.02</td>
+                    <td>子路由。 SERVER子网的网关</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>路由器</td>
+                    <td>华硕AC88U</td>
+                    <td></td>
+                    <td>子路由 LOCAL子网的网关，为家人提供WIFI</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>NAS</td>
+                    <td>PVE虚拟化</td>
+                    <td>Synology</td>
+                    <td>文件备份分享 流媒体</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>交换机</td>
+                    <td>网件GS108t</td>
+                    <td></td>
+                    <td>子交换机。切换不同的内网, 为客户端提供端口</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>个人电脑</td>
+                    <td>因特尔NUC</td>
+                    <td>Manjaro</td>
+                    <td>主力PC</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td>个人电脑</td>
+                    <td>PVE虚拟化</td>
+                    <td>Windwos 10</td>
+                    <td>用于处理在Linux下不能执行的任务, 远程链接</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                    <td>CI 服务器</td>
+                    <td>PVE虚拟化</td>
+                    <td>Ubuntu 22.04</td>
+                    <td>自动化部署 自动化测试</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>HP microserver gen8详细信息</h3>
+            <p><small>显示不全可以左右滑动动</small></p>
+            <pre>
+root@pve:~$ qm list
+      VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID
+       100 dsm                  running    2048               0.05 1431
+       101 ubuntu               running    1024              32.00 1581
+       102 openwrt-master       running    512                0.00 1358
+       103 openwrt              running    512                0.27 1513
+       104 win10                running    4096             100.00 1644
+       105 centos               running    2048               0.00 1695
+       106 networking           running    1024               0.00 1766
+       107 test                 running    2048               0.00 1836
+       108 ci                   running    2048              32.00 2329594
+root@pve:~$ screenfetch
+         _,met$$$$$gg.           root@pve
+      ,g$$$$$$$$$$$$$$$P.        OS: Debian
+    ,g$$P""       """Y$$.".      Kernel: x86_64 Linux 5.4.78-2-pve
+   ,$$P'              `$$$.      Uptime: 1220d 17h 5m
+  ',$$P       ,ggs.     `$$b:    Packages: 743
+  `d$$'     ,$P"'   .    $$$     Shell: bash 5.0.3
+   $$P      d$'     ,    $$P     CPU: Intel Xeon E3-1265L V2 @ 8x 3.5GHz [8.3°C]
+   $$:      $$.   -    ,d$$'     GPU: mgag200drmfb
+   $$\;      Y$b._   _,d$P'      RAM: 10966MiB / 11996MiB
+   Y$$.    `.`"Y$$$$P"'
+   `$$b      "-.__
+    `Y$$
+     `Y$$.
+       `$$b.
+         `Y$$b.
+            `"Y$b._
+                `""""
+            </pre>
+          </section>
+
+  </div>
+</article>
+{% endblock %}
