@@ -15,7 +15,7 @@ second_content = "second content"
 
 class HomePageTest(TestCase):
     def test_home_page_using_template(self):
-        response = self.client.get(reverse("home"))
+        response = self.client.get(reverse("blog:home"))
         self.assertTemplateUsed(response, "blog/home.html")
 
     def create_post(self, title, content):
@@ -25,7 +25,7 @@ class HomePageTest(TestCase):
         self.create_post(first_title, first_content)
         self.create_post(second_title, second_content)
 
-        response = self.client.get(reverse("home"))
+        response = self.client.get(reverse("blog:home"))
         self.assertContains(response, first_title)
 
 
@@ -35,11 +35,11 @@ class PostDetailTest(TestCase):
 
     def test_post_detail_page_using_template(self):
         post = Post.objects.first()
-        response = self.client.get(reverse("detail", args=[post.pk]))
+        response = self.client.get(reverse("blog:detail", args=[post.pk]))
         self.assertTemplateUsed(response, "blog/detail.html")
 
     def test_post_detail_pass_post(self):
         post = Post.objects.first()
-        response = self.client.get(reverse("detail", args=[post.pk]))
+        response = self.client.get(reverse("blog:detail", args=[post.pk]))
         pass_post = response.context["post"]
         self.assertEqual(pass_post, post)
