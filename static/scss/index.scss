@@ -10,7 +10,7 @@ main {
 
     .post-line {
       display: flex;
-      align-items: flex-start;
+      align-items: flex-end;
       flex-flow: row nowrap;
       font-size: 1.2rem;
       margin-bottom: 1rem;
@@ -41,6 +41,10 @@ main {
         a {
           color: var(--text-second-color);
         }
+      }
+      @include max-w(600) {     
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   }
