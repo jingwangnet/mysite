@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}静网 jing Wang{% endblock %}
+{% load static %}
+{% block css %}{% static 'css/index.css' %}{% endblock %}
+
+{% block content %}
+{% regroup posts|dictsortreversed:"publish.year" by publish.year as year_posts %}
+  {% for year, posts_list  in  year_posts %}
+  <section>
+    <h1 class="site-date-catalog">{{ year }}</h1>
+      {% for post in posts_list %}
+      <article class="post-line">
+        <h1 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+        <p class="post-date">{{ post.publish|date:'M d' }}</p>
+      </article>
+      {% endfor %}
+    </section>
+  {% endfor %}
+{% endblock %}

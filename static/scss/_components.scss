@@ -1,0 +1,68 @@
+article.post {
+  @import 'pygments';
+  .post-content {
+    a {
+      text-decoration: underline;
+    }
+    strong,b {
+      color: var(--text-second-color);
+      &::before {
+        content: " ";
+      }
+      &::after {
+        content: " ";
+      }
+    }
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        code {
+          display: inline-block;
+          padding: 0  0.5rem;
+          background-color: var(--bg-color);
+        }
+    }
+
+    del {
+      text-decoration: line-through;
+    }
+    ul, ol {
+      margin-left: 2rem; 
+      margin-bottom: 1rem;
+      li {
+        list-style: inside;
+        margin-top: 10px;
+      }
+    }
+    ul.contact {
+      li {
+        list-style: none;
+        i {
+          display: inline-block;
+          padding-right:  1rem;
+        }
+      }
+    }
+    
+    ol {
+      li {
+        list-style: auto;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+span.tag {
+    color: black;
+  &::before {
+    content:"#";
+    font-weight: bold;
+  }
+  &::after {
+    content: ' ';
+  }
+}
+
+

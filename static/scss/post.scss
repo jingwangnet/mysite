@@ -1,0 +1,30 @@
+@import 'base';
+
+main {
+  article.post {
+    header {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+
+      p.post-info {
+        display: flex;
+        font-weight: 700;
+        .post-date, .post-author {
+          flex: 1 1 auto;
+        }
+        .post-author {
+          text-align: right;
+          font-weight: unset;
+          color: var(--text-second-color);
+          text-decoration: underline;
+        }
+      }
+    }
+    .post-content {
+      p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+      }
+    }
+  }
+}

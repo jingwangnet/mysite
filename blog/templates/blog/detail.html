@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% load static %}
+{% block css %}{% static 'css/post.css' %}{% endblock %}
+
+{% block content %}
+    <article class="post">
+      <header>
+        <h1>{{ post.title }}</h1>
+        <p class="post-info">
+          <span class="post-date">{{ post.publish }}</span>
+          <span class="post-author"><a href="{% url 'about' %}">@jingwangnet</a></span>
+        </p>
+      </header>
+      <div class="post-content">
+        {% load blog_tags %}
+        {{ post.content|markdown }}
+      </div>
+    </article>
+{% endblock %}
