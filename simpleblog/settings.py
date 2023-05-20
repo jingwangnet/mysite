@@ -11,23 +11,55 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+ENV = os.environ.get("ENV")
+
+if ENV == "dev":
+    env = environ.Env(
+        SECRET_KEY=(
+            str,
+            "django-insecure-+^iqw9r&=2tmgx(c6_t_9^$h5@z7u*v3=r=7!0rpt&0ts##$g^",
+        ),
+        DEBUG=(bool, True),
+        HOSTS=(list, ("localhost", "127.0.0.1", "*")),
+        SQLITE=("db", "sqlite:///db.sqlite3"),
+    )
+elif ENV == "test":
+    env = environ.Env(
+        SECRET_KEY=(str, "nxjf^c(*f223-s@=h_hb_ywzo*!21e)w_40#pt19sx4!$+6zb$"),
+        DEBUG=(bool, False),
+        HOSTS=(list, ("localhost", "127.0.0.1", "*")),
+        SQLITE=("db", "sqlite:///db.sqlite3"),
+    )
+elif ENV is None:
+    raise Exception(
+        """Please set system variable of ENV before running django.
+        \n
+        Example: export ENV='dev'
+        \n
+        """
+    )
+else:
+    env = environ.Env()
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-+^iqw9r&=2tmgx(c6_t_9^$h5@z7u*v3=r=7!0rpt&0ts##$g^"
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = [
-    "*",
-]
+ALLOWED_HOSTS = env.list("HOSTS")
 
 
 # Application definition
@@ -79,12 +111,7 @@ WSGI_APPLICATION = "simpleblog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+DATABASES = {"default": env.db("SQLITE")}
 
 
 # Password validation
@@ -125,6 +152,15 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+if not DEBUG:
+    STATIC_ROOT = env.path("STATIC_ROOT")
+    MEDIA_ROOT = env.path("MEDIA_ROOT")
+    CSRF_TRUSTED_ORIGINS = env.list("CSRF_DOMAIN")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
