@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENV = os.environ.get("ENV")
 
-if ENV == "dev":
+if ENV == "dev" or ENV == "test":
     env = environ.Env(
         SECRET_KEY=(
             str,
@@ -30,14 +30,10 @@ if ENV == "dev":
         HOSTS=(list, ("localhost", "127.0.0.1", "*")),
         SQLITE=("db", "sqlite:///db.sqlite3"),
     )
-elif ENV == "test":
-    env = environ.Env(
-        SECRET_KEY=(str, "nxjf^c(*f223-s@=h_hb_ywzo*!21e)w_40#pt19sx4!$+6zb$"),
-        DEBUG=(bool, True),
-        HOSTS=(list, ("localhost", "127.0.0.1", "*")),
-        SQLITE=("db", "sqlite:///db.sqlite3"),
-    )
-elif ENV is None:
+elif ENV == "live":
+    env = environ.Env()
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+else:
     raise Exception(
         """Please set system variable of ENV before running django.
         \n
@@ -45,9 +41,6 @@ elif ENV is None:
         \n
         """
     )
-else:
-    env = environ.Env()
-    environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -159,6 +152,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 if not DEBUG:
     STATIC_ROOT = env.path("STATIC_ROOT")
     MEDIA_ROOT = env.path("MEDIA_ROOT")
+    CSRF_DOMAIN = env.list("CSRF_DOMAIN")
     CSRF_TRUSTED_ORIGINS = env.list("CSRF_DOMAIN")
 
 
