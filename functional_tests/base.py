@@ -1,6 +1,8 @@
 import time
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -10,7 +12,12 @@ class FunctionalTest(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.browser = webdriver.Chrome()
+        if os.environ.get("ENV") == "dev":
+            cls.browser = webdriver.Chrome()
+        else:
+            options = Options()
+            options.headless = True
+            cls.browser = webdriver.Chrome(options=options)
 
     @classmethod
     def tearDownClass(cls):
