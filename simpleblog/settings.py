@@ -33,7 +33,7 @@ if ENV == "dev":
 elif ENV == "test":
     env = environ.Env(
         SECRET_KEY=(str, "nxjf^c(*f223-s@=h_hb_ywzo*!21e)w_40#pt19sx4!$+6zb$"),
-        DEBUG=(bool, False),
+        DEBUG=(bool, True),
         HOSTS=(list, ("localhost", "127.0.0.1", "*")),
         SQLITE=("db", "sqlite:///db.sqlite3"),
     )
