@@ -33,8 +33,7 @@ class HighlightRenderer(mistune.HTMLRenderer):
 @register.filter(name="markdown")
 def markdown_format(text):
     markdown = mistune.create_markdown(
-        renderer=HighlightRenderer(),
-        escape=False,
+        renderer=HighlightRenderer(escape=False),
         plugins=[
             DirectiveToc(),
             DirectiveInclude(),  # toc支持
