@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -10,3 +11,9 @@ class Page(models.Model):
     publish_time = models.DateTimeField(default=timezone.now)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse("pages", args=[self.permalink])
+
+    def __str__(self):
+        return self.title

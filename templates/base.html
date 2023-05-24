@@ -11,8 +11,8 @@
   <header>
     <a class="logo" href="/">jing wang</a>
     <ul class="navbar">
-      <li><a href="{% url 'lab' %}">home lab</a></li>
-      <li><a href="{% url 'about' %}">about me</a></li>
+      {% load links %}
+      {% show_links %}
     </ul>
   </header>
   
