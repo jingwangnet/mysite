@@ -54,15 +54,15 @@ class FunctionalTest(StaticLiveServerTestCase):
         content_input.send_keys(content)
         submit.click()
 
-    def create_page(self, title, permalink, text):
+    def create_page(self, title, url, text):
         title_input = self.browser.find_element(By.XPATH, '//*[@id="id_title"]')
-        permalink_input = self.browser.find_element(By.XPATH, '//*[@id="id_permalink"]')
+        url_input = self.browser.find_element(By.XPATH, '//*[@id="id_url"]')
         text_input = self.browser.find_element(By.XPATH, '//*[@id="id_text"]')
         submit = self.browser.find_element(
             By.XPATH, '//*[@id="page_form"]/div/div/input[1]'
         )
 
         title_input.send_keys(title)
-        permalink_input.send_keys(permalink)
+        url_input.send_keys(url)
         text_input.send_keys(text)
         submit.click()
