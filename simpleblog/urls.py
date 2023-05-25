@@ -21,7 +21,7 @@ from page.views import AboutPageView, LabPageView, pages
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blog.urls")),
-    path("<str:url>", pages, name="pages"),
+    path("<slug:url>/", pages, name="pages"),
     path("a/", AboutPageView.as_view(), name="about"),
     path("homelab/", LabPageView.as_view(), name="lab"),
 ]

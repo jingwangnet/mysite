@@ -1,5 +1,9 @@
 article.post {
   @import 'pygments';
+  h1, h2, h3 {
+    text-transform: capitalize;
+  }
+
   .post-content {
     a {
       text-decoration: underline;
@@ -23,7 +27,6 @@ article.post {
           background-color: var(--bg-color);
         }
     }
-
     del {
       text-decoration: line-through;
     }

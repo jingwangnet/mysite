@@ -21,14 +21,14 @@ class HomePageTest(FunctionalTest):
         # Creation the first post and validation
         self.browser.find_element(By.LINK_TEXT, "Posts").click()
         self.browser.find_element(By.LINK_TEXT, "ADD POST").click()
-        first_title = "The first post"
+        first_title = "第一篇博文"
         first_content = "content"
         self.create_post(first_title, first_content)
         self.browser.find_element(By.LINK_TEXT, first_title)
 
         # Creation the second post and validation
         self.browser.find_element(By.LINK_TEXT, "ADD POST").click()
-        second_title = "The second post"
+        second_title = "第二篇博文"
         second_content = "content 2"
         self.create_post(second_title, second_content)
         self.browser.find_element(By.LINK_TEXT, second_title)

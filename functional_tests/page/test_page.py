@@ -13,14 +13,12 @@ class PageViewTest(FunctionalTest):
         self.browser.find_element(By.LINK_TEXT, "Pages").click()
         self.browser.find_element(By.LINK_TEXT, "ADD PAGE").click()
         title = "about me"
-        permalink = "about"
+        url = "about-me"
         text = "content"
 
-        self.create_page(title, permalink, text)
-        self.browser.get(self.live_server_url)
+        self.create_page(title, url, text)
 
-        time.sleep(5)
+        self.browser.get(self.live_server_url)
         about_page = self.browser.find_element(By.LINK_TEXT, "about me")
         about_page.click()
-
         self.assertEqual(ABOUT_TITLE, self.browser.title)

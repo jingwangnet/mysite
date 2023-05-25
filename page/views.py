@@ -13,6 +13,6 @@ class LabPageView(TemplateView):
 
 
 def pages(requets, url):
-    page = get_object_or_404(Page, permalink=url)
+    page = get_object_or_404(Page, url=url)
     context = {"page": page}
     return render(requets, "page/page.html", context)
