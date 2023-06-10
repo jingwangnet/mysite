@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 INSTALLED_APPS.extend(["blog", "page"])
@@ -149,12 +150,14 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+
 if not DEBUG:
     STATIC_ROOT = env.path("STATIC_ROOT")
     MEDIA_ROOT = env.path("MEDIA_ROOT")
     CSRF_DOMAIN = env.list("CSRF_DOMAIN")
     CSRF_TRUSTED_ORIGINS = env.list("CSRF_DOMAIN")
-    SITE_ID = 1
+
+SITE_ID = 1
 
 
 # Default primary key field type
