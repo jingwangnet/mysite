@@ -154,6 +154,7 @@ if not DEBUG:
     MEDIA_ROOT = env.path("MEDIA_ROOT")
     CSRF_DOMAIN = env.list("CSRF_DOMAIN")
     CSRF_TRUSTED_ORIGINS = env.list("CSRF_DOMAIN")
+    SITE_ID = 1
 
 
 # Default primary key field type
