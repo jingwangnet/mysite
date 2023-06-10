@@ -37,6 +37,13 @@ article.post {
         list-style: inside;
         margin-top: 10px;
       }
+      li.task-list-item {
+        list-style: none;
+        margin-left: -1rem;
+        input.task-list-item-checkbox {
+          margin-right: 10px;
+        }
+      }
     }
     ul.contact {
       li {
