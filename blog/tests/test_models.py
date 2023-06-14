@@ -1,5 +1,6 @@
 from django.test import TestCase
-from blog.models import Post
+from django.core.exceptions import ValidationError
+from blog.models import Post, Tag
 from django.urls import reverse
 
 
@@ -30,3 +31,22 @@ class PostModelTest(TestCase):
     def test_get_absolute_url(self):
         post1 = Post.objects.create(title="The first post", content="content")
         self.assertEqual(post1.get_absolute_url(), "/1/")
+
+
+class TagModelTest(TestCase):
+    def test_tag_creation_and_retrieve(self):
+        tag = Tag()
+        tag.tag = "tag"
+        tag.save()
+
+        self.assertEqual(tag.tag, "tag")
+
+    def test_tag_cant_be_able_as_empty(self):
+        tag = Tag()
+        tag.tag = ""
+        with self.assertRaises(ValidationError):
+            tag.full_clean()
+
+    def test_tag_display(self):
+        tag = Tag.objects.create(tag="tag")
+        self.assertEqual(str(tag), "tag")

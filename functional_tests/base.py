@@ -2,6 +2,7 @@ import time
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 
 from django.contrib.auth import get_user_model
@@ -43,12 +44,18 @@ class FunctionalTest(StaticLiveServerTestCase):
         password_input.send_keys(password)
         submit.click()
 
-    def create_post(self, title, content):
+    def create_post(self, title, content, *tags):
         title_input = self.browser.find_element(By.XPATH, '//*[@id="id_title"]')
         content_input = self.browser.find_element(By.XPATH, '//*[@id="id_content"]')
         submit = self.browser.find_element(
             By.XPATH, '//*[@id="post_form"]/div/div/input[1]'
         )
+
+        if tags:
+            select_tags = self.browser.find_element(By.XPATH, '//*[@id="id_tags"]')
+            select = Select(select_tags)
+            for tag in tags:
+                select.select_by_visible_text(tag)
 
         title_input.send_keys(title)
         content_input.send_keys(content)
