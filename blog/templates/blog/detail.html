@@ -11,6 +11,13 @@
           <span class="post-date">{{ post.publish }}</span>
           <span class="post-author"><a href="{% url 'about' %}">@jingwangnet</a></span>
         </p>
+        {% if post.tags.all %}
+        <p class="post-categories">
+            {% for tag in post.tags.all %}
+            <span class="tag">{{tag}}</span>
+            {% endfor %}
+        </p>
+        {% endif %}
       </header>
       <div class="post-content">
         {% load blog_tags %}
